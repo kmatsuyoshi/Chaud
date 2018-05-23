@@ -3,17 +3,19 @@
 // Lab04 -- All That Bouncin’
 // 2018-05-24r
 
-// Ball[] balls = new Ball[25];
+Ball[] balls = new Ball[25];
 
 void setup() {
-   background(0); 
-   size( 600, 600 );
-   for( int i = 0; i < 25; i++ ) {
-      Ball();
-    }
+  background(0); 
+  size( 600, 600 );
+  for ( int i = 0; i < 25; i++ ) {
+    balls[i] = new Ball();
+  }
 }
 
 void draw() {
-   move();
-   
+  background(0); 
+  for ( int i = 0; i < 25; i++ ) {
+    balls[i].move();
+  }
 }
