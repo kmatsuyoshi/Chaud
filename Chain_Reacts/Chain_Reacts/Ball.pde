@@ -12,8 +12,8 @@ class Ball {
   float ySpeed;
 
   Ball() {
-    xCor = random( 0, 600 );  
-    yCor = random( 0, 600 );
+    xCor = random( 35, 565 );  
+    yCor = random( 35, 565 );
     xSpeed = random( 1, 20 );
     ySpeed = random( 1, 20 );
     ballColor = color( random( 0, 255), random( 0, 255), random( 0, 255 ));
