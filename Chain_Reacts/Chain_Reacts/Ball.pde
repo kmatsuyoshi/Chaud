@@ -4,7 +4,16 @@
 // 2018-05-24r
 
 class Ball {
-
+  
+  final static int MOVING = 0;
+  final static int GROWING = 1;
+  final static int SHRINKING = 2;
+  final static int DEAD = 3;
+  
+  final float CHANGE_FACTOR = 0.25;
+  final float MAX_RADIUS = 50;
+  
+  float rad;
   float xCor;
   float yCor;
   color ballColor;
@@ -14,6 +23,14 @@ class Ball {
   Ball() {
     xCor = random( 35, 565 );  
     yCor = random( 35, 565 );
+    xSpeed = random( 1, 10 );
+    ySpeed = random( 1, 10 );
+    ballColor = color( random( 0, 255), random( 0, 255), random( 0, 255 ));
+  }
+  
+  Ball( int inputX, int inputY) {
+    xCor = inputX;  
+    yCor = inputY;
     xSpeed = random( 1, 20 );
     ySpeed = random( 1, 20 );
     ballColor = color( random( 0, 255), random( 0, 255), random( 0, 255 ));
@@ -22,13 +39,22 @@ class Ball {
   void move() {
     xCor += xSpeed;
     yCor += ySpeed;
-    if ( xCor > 560 || xCor < 40 ) {
+    if ( xCor > 600 || xCor < 0 ) {
       xSpeed *= -1;
     }
-    if ( yCor > 560 || yCor < 40 ) {
+    if ( yCor > 600 || yCor < 0 ) {
       ySpeed *= -1;
     }
     ellipse( xCor, yCor, 40, 40 );
     fill( ballColor );
+  }
+  
+  void grow() {
+    while(rad < MAX_RADIUS){
+      rad += CHANGE_FACTOR;
+    }
+    while(rad > 0){
+    rad -= CHANGE_FACTOR;
+    }  
   }
 }
