@@ -6,6 +6,8 @@
 Ball[] balls = new Ball[25];
 boolean mouse = false;
 
+boolean shrink = false;
+
 void setup() {
   background(0); 
   size( 600, 600 );
@@ -20,9 +22,17 @@ void draw() {
       balls[i].move();
     }
     if ( mouse ) {
-      ellipse( balls[24].xCor, balls[24].yCor,40, 40 );
-      fill( balls[24].ballColor );
-       balls[24].grow(); 
+      if ( shrink == false || balls[24].rad < balls[24].MAX_RADIUS ) {
+        balls[24].grow(); 
+      }
+      if ( balls[24].rad == balls[24].MAX_RADIUS ) {
+         shrink = true;
+      }
+      if ( shrink == true && balls[24].rad > 0 ) {
+        balls[24].shrink();
+      }
+      ellipse( balls[24].xCor, balls[24].yCor, 30, 30 );
+      fill( balls[24].ballColor ); 
     }
 }
 
