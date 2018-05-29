@@ -10,9 +10,11 @@ class Ball {
   final static int SHRINKING = 2;
   final static int DEAD = 3;
 
-  final float CHANGE_FACTOR = 0.25;
-  final float MAX_RADIUS = 50;
-
+  final float CHANGE_FACTOR = 1;
+  final float MAX_RADIUS = 100;
+  
+  boolean shrink = false;
+  
   float rad;
   float xCor;
   float yCor;
@@ -51,15 +53,28 @@ class Ball {
   }
 
   void grow() {
-      rad += CHANGE_FACTOR;
-      ellipse( balls[24].xCor, balls[24].yCor, rad, rad );
-      fill( balls[24].ballColor );
+    rad += CHANGE_FACTOR;
+    ellipse( xCor, yCor, rad, rad );
+    fill( ballColor );
   }
-  
+
   void shrink() {
-      rad -= CHANGE_FACTOR;
-      ellipse( balls[24].xCor, balls[24].yCor, rad, rad );
-      fill( balls[24].ballColor );
-    
+    rad -= CHANGE_FACTOR;
+    ellipse( xCor, yCor, rad, rad );
+    fill( ballColor );
+  }
+
+  void stick() {
+    if ( xCor == growBall.xCor + growBall.rad || xCor == growBall.xCor - growBall.rad || yCor == growBall.yCor + growBall.rad || yCor == growBall.yCor - growBall.rad ) {
+      if ( !shrink ) {
+        grow();
+        if ( rad >= MAX_RADIUS ) {
+          shrink = true;
+        }
+      }
+      if ( shrink ) {
+        shrink();
+      }
+    }
   }
 }
